@@ -1,0 +1,45 @@
+{
+  "name": "mundocrm/leads-sender",
+  "description": "Vendor to send leads forms to mundocrm.ar.",
+  "keywords": ["leads", "send", "forms", "webhooks", "mundocrm", "crm"],
+  "authors": [
+    {
+        "name": "Manuel Bruña",
+        "email": "info@mundocrm.ar",
+        "homepage": "https://github.com/mundocrm"
+    }
+  ],
+  "license": "MIT",
+  "type": "project",
+  "require": {
+    "php": "^7.2.5 || ^8.0",
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "provide": {
+      "psr/http-client-implementation": "1.0"
+  },
+  "suggest": {
+      "ext-curl": "Required for CURL handler support",
+      "ext-intl": "Required for Internationalized Domain Name (IDN) support",
+      "psr/log": "Required for using the Log middleware"
+  },
+  "config": {
+      "preferred-install": "dist",
+      "sort-packages": true
+  },
+  "extra": {
+      "branch-alias": {
+          "dev-master": "1.0-dev"
+      }
+  },
+  "autoload": {
+      "psr-4": {
+          "MundoCRM\\Leads": "src/"
+      }
+  },
+  "autoload-dev": {
+      "psr-4": {
+          "MundoCRM\\Tests\\": "tests/"
+      }
+  }
+}
