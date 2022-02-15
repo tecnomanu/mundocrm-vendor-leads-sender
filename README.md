@@ -1,4 +1,4 @@
-# Leads Sender 1.0 #
+# Mundo CRM - Leads Sender 1.0 #
 
 ## Description ##
 
@@ -23,7 +23,7 @@ You should now have the file `composer.phar` in your project directory.
 Run in your project root:
 
 ```
-php composer.phar require ideasconectadas/leads-sender
+php composer.phar require mundocrm/leads-sender
 ```
 
 You should now have the files `composer.json` and `composer.lock` as well as

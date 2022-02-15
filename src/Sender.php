@@ -1,5 +1,5 @@
 <?php
-namespace MundoCR\Leads;
+namespace MundoCRM\Leads;
 
 use ErrorException;
 use GuzzleHttp\Client as ClientHttp;
