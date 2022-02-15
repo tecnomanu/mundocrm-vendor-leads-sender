@@ -34,12 +34,12 @@
   },
   "autoload": {
       "psr-4": {
-          "MundoCRM\\Leads": "src/"
+          "MundoCRM\\Leads\\": "src/"
       }
   },
   "autoload-dev": {
       "psr-4": {
-          "MundoCRM\\Tests\\": "tests/"
+          "MundoCRM\\Leads\\Tests\\": "tests/"
       }
   }
 }
