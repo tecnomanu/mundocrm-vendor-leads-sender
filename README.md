@@ -1,7 +1,7 @@
 # Mundo CRM - Leads Sender
 
 [![Latest Version](https://img.shields.io/github/release/tecnomanu/mundocrm-vendor-leads-sender)](https://github.com/tecnomanu/mundocrm-vendor-leads-sender/releases)
-[![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)](hhttps://github.com/tecnomanu/mundocrm-vendor-leads-sender/blob/main/LICENSE)
 
 ## Description
 
@@ -72,4 +72,4 @@ return response()->json($response, $response->status_code);
 ```
 
 ### License
-MuundoCRM and vendors are made available under the MIT License (MIT). Please see [ License File](https://github.com/tecnomanu/ngxadmin-lumen-jwtlogin-base/blob/master/LICENSE.txt) information.
+MuundoCRM and vendors are made available under the MIT License (MIT). Please see [ License File](https://github.com/tecnomanu/mundocrm-vendor-leads-sender/blob/main/LICENSEt) information.
