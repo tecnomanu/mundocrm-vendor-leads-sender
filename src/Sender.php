@@ -3,12 +3,14 @@ namespace MundoCRM\Leads;
 
 use ErrorException;
 use GuzzleHttp\Client as ClientHttp;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\SenderInterface;
 
 /**
  * @method LeadsSender send()
  */
 
-class Sender
+class Sender implements SenderInterface
 {
     /** @var array Default request options */
     private $data;
@@ -72,7 +74,7 @@ class Sender
 
         // Reset demo values if is on test mode. Only for deug.
         if($debug || (isset($_SERVER["SERVER_NAME"]) && ($_SERVER["SERVER_NAME"] == "localhost" || $_SERVER["SERVER_NAME"] == "127.0.0.1"))){
-            $this->data["source_id"] = "6206f11b1126ec7c2c52c936";
+            $this->data["source_id"] = "62004b96eac2ba68c17a86a3";
             $this->data["app_key"] = "8601d871-d1e0-42bf-9d30-e0573cab3963";
             $this->data["ip"] = "186.108.64.200";
             $this->host = "http://api.mundocrm.test/v1/webhook/landing";
@@ -89,9 +91,8 @@ class Sender
         if($query){
             $values = explode("&", $query);
             foreach($values as $value){
-                array_push($result, explode("=", $value));
-                // $val = explode("=", $value);
-                // $result[$val[0]] = $val[1];
+                $val = explode("=", $value);
+                $result[$val[0]] = $val[1];
             }
         }
 
@@ -111,45 +112,18 @@ class Sender
     
     public function send(){
         try{
-            //return $this->data;
-            // print_r(function_exists('http_post_data') === true);
-            // $response = false;
-            // $http_code = 200;
-            // if (function_exists('http_post_data') == true) {
-            //     $response = http_post_data($this->host, $this->data);
-            // } else {
-            //     $ch = curl_init($this->host);
-            //     # Form data string
-            //     $postString = http_build_query($this->data, '', '&');
-            //     print_r($postString);
-            //     # Setting our options
-            //     curl_setopt($ch, CURLOPT_POST, 1);
-            //     curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
-            //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            //     curl_setopt($ch, CURLOPT_ENCODING, '');
-            //     # Get the response
-            //     $response = curl_exec($ch);
-
-            //     if (!curl_errno($ch))
-            //         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-            //     curl_close($ch);
-            // }
-            // return $response;
-            // $resp = json_decode($response) == null ? $response : json_decode($response);
             $client = new ClientHttp();
             $request = $client->request('POST', $this->host, ['json'=> $this->data]);
-
-            
-            switch ($request->getStatusCode()) {
-                case 200:
-                    return json_encode($request->getBody());
-                    break;
-                default:
-                    return json_encode($request->getBody());
-            }
+            return json_decode($request->getBody());
         } catch (ErrorException $err) {
-            return json_encode(['error' => "Error interno"], 500);
+            http_response_code(500);
+            print_r("ErrorException");
+            return json_encode(['status' => 'error', 'type' => 'internel_error', 'status_code' => 500, 'message' => "Error interno"]);
+        } catch (RequestException $err) {
+            $response = $err->getResponse();
+            $content = $response->getBody()->getContents();
+            http_response_code($err->getCode());
+            return json_decode($content);
         }
     }
 }
