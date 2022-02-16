@@ -1,14 +1,23 @@
-# Mundo CRM - Leads Sender 1.0 #
+# Mundo CRM - Leads Sender
+[![GitHub version](https://badge.fury.io/gh/tecnomanu%2Fmundocrm-vendor-leads-sender.svg)](https://badge.fury.io/gh/tecnomanu%2Fmundocrm-vendor-leads-sender)
 
-## Description ##
+## Description
 
-This package provide the methos to compile a form data and send to api.leads.com.ar.
+This package provide the methos to compile a form data and send to api.mundocrm.ar.
 
-## Install via Composer ##
+## What is included?
+- Sender interface:
+    - With this can generete you lead sender.
+    - Send function to insert on your source the lead.
+    - Validate and return response success or error.
+
+## Installation and configuration
+
+### Install via Composer
 
 We recommend installing this package with [Composer](http://getcomposer.org/).
 
-### Download Composer ###
+1. Download Composer
 
 To download Composer, run in the root directory of your project:
 
@@ -18,7 +27,7 @@ curl -sS https://getcomposer.org/installer | php
 
 You should now have the file `composer.phar` in your project directory.
 
-### Install Dependencies ###
+2. Install Dependencies
 
 Run in your project root:
 
@@ -30,7 +39,7 @@ You should now have the files `composer.json` and `composer.lock` as well as
 the directory `vendor` in your project directory. If you use a version control
 system, `composer.json` should be added to it.
 
-### Require Autoloader ###
+### Require Autoloader
 
 After installing the dependencies, you need to require the Composer autoloader
 from your code:
@@ -39,22 +48,27 @@ from your code:
 require 'vendor/autoload.php';
 ```
 
-## Install via Phar ##
+## How can you use it
 
-Although we strongly recommend using Composer, we also provide a
-[phar archive](http://php.net/manual/en/book.phar.php) containing most of the
-dependencies for GeoIP2. Our latest phar archive is available on
-[our releases page](https://github.com/maxmind/GeoIP2-php/releases).
+1. Create a new Sender:
+```
+ $leads = new Sender($app_key, $source_id, $data, $items, $debug); 
+```
 
-### Install Dependencies ###
+2. Instance ``send`` function:
+```
+$response = $leads->send();
+```
 
-In order to use the phar archive, you must have the PHP
-[Phar extension](http://php.net/manual/en/book.phar.php) installed and
-enabled.
+3. Process the response as you preferer:
+```
+// Example to simple return
+echo json_encode($response);
 
-If you will be making web service requests, you must have the PHP
-[cURL extension](http://php.net/manual/en/book.curl.php)
-installed to use this archive. For Debian based distributions, this can
-typically be found in the the `php-curl` package. For other operating
-systems, please consult the relevant documentation. After installing the
-extension you may need to restart your web server.
+// Example to Laravel response:
+return response()->json($response, $response->status_code);
+```
+
+
+### License
+[MIT](https://github.com/tecnomanu/ngxadmin-lumen-jwtlogin-base/blob/master/LICENSE.txt) license.
