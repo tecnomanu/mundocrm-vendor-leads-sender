@@ -1,0 +1,4 @@
+- Update readme
+- Add clean senderProvider for future implement to Laravel
+- Fix send function and add interface
+- Update version to 0.2
